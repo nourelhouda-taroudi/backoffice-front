@@ -15,13 +15,34 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import('./views/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
       {
-        path: 'transfer',
+        path: 'transfers',
         loadChildren: () =>
           import('./views/transfer/transfer.module').then(
             (m) => m.TransferModule
+          ),
+      },
+      {
+        path: 'sirone',
+        loadChildren: () =>
+          import('./views/sirone/sirone.module').then((m) => m.SironeModule),
+      },
+      {
+        path: 'beneficiaries',
+        loadChildren: () =>
+          import('./views/beneficiary/beneficiary.module').then(
+            (m) => m.BeneficiaryModule
+          ),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./views/settings/settings.module').then(
+            (m) => m.SettingsModule
           ),
       },
     ],

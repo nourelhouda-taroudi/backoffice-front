@@ -6,17 +6,6 @@
     <div class="sidebar-header flex items-center justify-center py-4">
       <div class="inline-flex">
         <a href="#" class="inline-flex flex-row items-center">
-          <svg
-            class="w-10 h-10 text-red-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M11.757 2.034a1 1 0 01.638.519c.483.967.844 1.554 1.207 2.03.368.482.756.876 1.348 1.467A6.985 6.985 0 0117 11a7.002 7.002 0 01-14 0c0-1.79.684-3.583 2.05-4.95a1 1 0 011.707.707c0 1.12.07 1.973.398 2.654.18.374.461.74.945 1.067.116-1.061.328-2.354.614-3.58.225-.966.505-1.93.839-2.734.167-.403.356-.785.57-1.116.208-.322.476-.649.822-.88a1 1 0 01.812-.134zm.364 13.087A2.998 2.998 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879.586.585.879 1.353.879 2.121s-.293 1.536-.879 2.121z"
-              clip-rule="evenodd"
-            />
-          </svg>
           <span
             class="leading-10 text-gray-100 text-2xl font-bold ml-1 uppercase"
             >BackOffice</span
@@ -28,8 +17,9 @@
       <ul class="flex flex-col w-full">
         <li class="my-px">
           <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100"
+            [routerLink]="['/dashboard']"
+            routerLinkActive="bg-gray-100 text-gray-700"
+            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
               class="flex items-center justify-center text-lg text-gray-400"
@@ -54,13 +44,14 @@
         <li class="my-px">
           <span
             class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase"
-            >Projects</span
+            >Transfers</span
           >
         </li>
         <li class="my-px">
           <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            [routerLink]="['/transfers']"
+            routerLinkActive="bg-gray-100 text-gray-700"
+            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
               class="flex items-center justify-center text-lg text-gray-400"
@@ -79,38 +70,14 @@
                 />
               </svg>
             </span>
-            <span class="ml-3">Manager</span>
+            <span class="ml-3">Transfers</span>
           </a>
         </li>
         <li class="my-px">
           <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <span
-              class="flex items-center justify-center text-lg text-gray-400"
-            >
-              <svg
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="h-6 w-6"
-              >
-                <path
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                />
-              </svg>
-            </span>
-            <span class="ml-3">Tasks</span>
-          </a>
-        </li>
-        <li class="my-px">
-          <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            [routerLink]="['/beneficiaries']"
+            routerLinkActive="bg-gray-100 text-gray-700"
+            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
               class="flex items-center justify-center text-lg text-gray-400"
@@ -129,14 +96,41 @@
                 />
               </svg>
             </span>
-            <span class="ml-3">Clients</span>
-            <span
-              class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto"
-              >1k</span
-            >
+
+            <span class="ml-3">Beneficiaries</span>
           </a>
         </li>
         <li class="my-px">
+          <a
+            [routerLink]="['/sirone']"
+            routerLinkActive="bg-gray-100 text-gray-700"
+            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <span
+              class="flex items-center justify-center text-lg text-gray-400"
+            >
+              <svg
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                />
+              </svg>
+            </span>
+            <span class="ml-3">SIRONE</span>
+            <!-- <span
+              class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto"
+              >1k</span
+            > -->
+          </a>
+        </li>
+        <!-- <li class="my-px">
           <a
             href="#"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
@@ -160,14 +154,14 @@
             </span>
             <span class="ml-3">Add new</span>
           </a>
-        </li>
+        </li> -->
         <li class="my-px">
           <span
             class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase"
-            >Account</span
+            >Settings</span
           >
         </li>
-        <li class="my-px">
+        <!-- <li class="my-px">
           <a
             href="#"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
@@ -220,11 +214,12 @@
               >10</span
             >
           </a>
-        </li>
+        </li> -->
         <li class="my-px">
           <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            [routerLink]="['/settings']"
+            routerLinkActive="bg-gray-100 text-gray-700"
+            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
               class="flex items-center justify-center text-lg text-gray-400"
@@ -244,7 +239,7 @@
                 <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </span>
-            <span class="ml-3">Settings</span>
+            <span class="ml-3">Global Settings</span>
           </a>
         </li>
         <li class="my-px">
@@ -337,7 +332,7 @@
               >
               <span
                 class="truncate w-20 text-gray-500 text-xs leading-none mt-1"
-                >Manager</span
+                >Admin</span
               >
             </span>
           </a>

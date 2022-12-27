@@ -5,12 +5,26 @@ import { DefaultLayoutComponent } from './views/containers';
 const routes: Routes = [
   {
     path: '',
-    component: DefaultLayoutComponent,
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   },
   {
-    path: 'transfer',
-    loadChildren: () =>
-      import('./views/transfer/transfer.module').then((m) => m.TransferModule),
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+      {
+        path: 'transfer',
+        loadChildren: () =>
+          import('./views/transfer/transfer.module').then(
+            (m) => m.TransferModule
+          ),
+      },
+    ],
   },
 ];
 

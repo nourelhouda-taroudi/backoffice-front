@@ -1,5 +1,54 @@
 <div>
   <h1 class="font-bold text-2xl text-gray-700">SIRONE</h1>
 
-  <div class=""></div>
+  <div class="mt-10" *ngIf="!loading">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3 px-6">Id</th>
+          <th scope="col" class="py-3 px-6">Beneficiary</th>
+          <th scope="col" class="py-3 px-6">Block Date</th>
+          <th scope="col" class="py-3 px-6">Motif</th>
+          <th scope="col" class="py-3 px-6">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b">
+          <th
+            scope="row"
+            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+          >
+            123
+          </th>
+          <td class="py-4 px-6">John Doe</td>
+          <td class="py-4 px-6">29/12/2022</td>
+          <td class="py-4 px-6">Bad client</td>
+          <td class="py-4 px-6 grid grid-cols-2 gap-2">
+            <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+              UnBlock
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="bg-white border-b"
+          *ngFor="let sirone of sironeList; let i = index"
+        >
+          <th
+            scope="row"
+            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+          >
+            {{ sirone.id }}
+          </th>
+          <td class="py-4 px-6">{{ sirone.beneficiary }}</td>
+          <td class="py-4 px-6">{{ sirone.block_date }}</td>
+          <td class="py-4 px-6">{{ sirone.motif }}</td>
+          <td class="py-4 px-6">
+            <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+              UnBlock
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

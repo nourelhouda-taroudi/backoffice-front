@@ -1,6 +1,58 @@
 <div>
-    <h1 class="font-bold text-2xl text-gray-700">Beneficiaries</h1>
-  
-    <div class=""></div>
+  <h1 class="font-bold text-2xl text-gray-700">Beneficiaries</h1>
+
+  <div class="mt-10"  *ngIf="!loading">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3 px-6">Id</th>
+          <th scope="col" class="py-3 px-6">Nom</th>
+          <th scope="col" class="py-3 px-6">Email</th>
+          <th scope="col" class="py-3 px-6">Téléphone</th>
+          <th scope="col" class="py-3 px-6">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b">
+          <th
+            scope="row"
+            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+          >
+            123
+          </th>
+          <td class="py-4 px-6">John Doe</td>
+          <td class="py-4 px-6">jdoe@gmail.com</td>
+          <td class="py-4 px-6">076543256</td>
+          <td class="py-4 px-6 grid grid-cols-2 gap-2">
+            <button
+              class="rounded bg-red-400 text-white text-center border px-4 py-3"
+            >
+              Block
+            </button>
+            <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+              UnBlock
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="bg-white border-b"
+          *ngFor="let beneficiary of beneficiaries let i = index"
+        >
+          <th
+            scope="row"
+            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+          >
+            123
+          </th>
+          <td class="py-4 px-6">BLOACKED</td>
+          <td class="py-4 px-6">John Doe</td>
+          <td class="py-4 px-6">12200DH</td>
+          <td class="py-4 px-6"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+  <!-- <div class="" !="" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div> -->
+</div>

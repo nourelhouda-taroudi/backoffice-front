@@ -1,7 +1,70 @@
 <div>
-  <h1 class="font-bold text-2xl text-gray-700">Transfers</h1>
+  <h1 class="font-bold text-2xl text-gray-700">TRANSFERS</h1>
+  <div class="w-full border my-5 flex justify-between">
+    <div class=""></div>
+    <button clas="text-white bg-blue-400 hover:bg-blue-600 rounded border px-3 py-2 hover:shadow-md">Create Transfer</button>
+  </div>
 
-  <div
-    class=""
-  ></div>
+  <div class="mt-10" *ngIf="!loading">
+    <div class="overflow-x-auto relative">
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3 px-6">Client Id</th>
+            <th scope="col" class="py-3 px-6">Status</th>
+            <th scope="col" class="py-3 px-6">Bénéficiaire</th>
+            <th scope="col" class="py-3 px-6">Montant</th>
+            <th scope="col" class="py-3 px-6">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white border-b">
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+            >
+              123
+            </th>
+            <td class="py-4 px-6">BLOCKED</td>
+            <td class="py-4 px-6">John Doe</td>
+            <td class="py-4 px-6">12200DH</td>
+            <td class="py-4 px-6 grid grid-cols-2 gap-2">
+              <button
+                class="rounded bg-red-400 text-white text-center border px-4 py-3"
+              >
+                Block
+              </button>
+              <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+                UnBlock
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="bg-white border-b"
+            *ngFor="let transfer of transfers; let i = index"
+          >
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+            >
+              {{ transfer.clientId }}
+            </th>
+            <td class="py-4 px-6">{{ transfer.status }}</td>
+            <td class="py-4 px-6">{{ transfer.beneficiary }}</td>
+            <td class="py-4 px-6">{{ transfer.transferAmount }}</td>
+            <td class="py-4 px-6">
+              <button
+                class="rounded bg-red-400 text-white text-center border px-4 py-3"
+              >
+                Block
+              </button>
+              <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+                UnBlock
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

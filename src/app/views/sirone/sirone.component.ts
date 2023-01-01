@@ -12,7 +12,9 @@ export class SironeComponent implements OnInit {
   sironeList: Sirone[] = [];
   constructor(private readonly sironeService: SironeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSironeList();
+  }
 
   /**
    * Get sirone list

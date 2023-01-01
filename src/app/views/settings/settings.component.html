@@ -5,82 +5,91 @@
     <div
       class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md"
     >
-      <div>
+      <div *ngIf="maxTransfer">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           Plafonds
         </h5>
-      </div>
-      <div class="mb-4">
-        <label
-          for="p_vente"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >Point de vente</label
+        <div class="mb-4">
+          <label
+            for="maxTransfer"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Point de vente</label
+          >
+          <input
+            type="number"
+            name="maxTransfer"
+            id="maxTransfer"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Plafond"
+            [(ngModel)]="maxTransfer.value"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+        </div>
+        <button
+          (click)="updateParam(maxTransfer)"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
         >
-        <input
-          type="number"
-          name="p_vente"
-          id="p_vente"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Plafond"
-          required
-        />
+          Modifier
+        </button>
       </div>
-      <button
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
-      >
-        Modifier
-      </button>
     </div>
   </div>
   <div class="mt-10">
     <div
       class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md"
     >
-      <div>
+      <div *ngIf="feesAgency">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           Commission
         </h5>
-      </div>
-      <div class="mb-4">
-        <label
-          for="p_vente"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >Point de vente %</label
+        <div class="mb-4">
+          <label
+            for="feesAgency"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Point de vente %</label
+          >
+          <input
+            type="number"
+            name="feesAgency"
+            id="feesAgency"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Frais d'agence"
+            [(ngModel)]="feesAgency.value"
+            required
+          />
+        </div>
+        <button
+          (click)="updateParam(feesAgency)"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
         >
-        <input
-          type="number"
-          name="p_vente"
-          id="p_vente"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Frais d'agence"
-          required
-        />
+          Modifier
+        </button>
       </div>
-      <button
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
-      >
-        Modifier
-      </button>
-      <div class="my-4">
-        <label
-          for="p_vente"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >Application %</label
+      <div *ngIf="feesApp">
+        <div class="my-4">
+          <label
+            for="feesApp"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Application %</label
+          >
+          <input
+            type="number"
+            name="feesApp"
+            id="feesApp"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Frais d'application"
+            required
+            [(ngModel)]="feesApp.value"
+          />
+        </div>
+        <button
+          (click)="updateParam(feesApp)"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
         >
-        <input
-          type="number"
-          name="p_vente"
-          id="p_vente"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Frais d'application"
-          required
-        />
+          Modifier
+        </button>
       </div>
-      <button
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none"
-      >
-        Modifier
-      </button>
     </div>
   </div>
 </div>

@@ -32,4 +32,22 @@ export class SironeComponent implements OnInit {
       }
     );
   }
+
+  /**
+   * remove from SIRONE
+   */
+  unblock(sirone: Sirone) {
+    const sironeId = sirone.id;
+    if (!sironeId) return;
+    console.log('Remove from sirone ' + sironeId);
+    // Uncomment this bloc when back ready
+    // this.sironeService.unblockBeneficiary(sironeId).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (err) => {
+    //     console.error(err);
+    //   }
+    // );
+  }
 }

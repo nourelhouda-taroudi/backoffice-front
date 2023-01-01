@@ -30,4 +30,31 @@ export class BeneficiaryComponent implements OnInit {
       }
     );
   }
+
+  blockBeneficiary(beneficiary: Beneficiary) {
+    const beneficiaryId = beneficiary.id;
+    if (!beneficiaryId) return;
+    console.log('Block beneficiary Id : ' + beneficiaryId);
+    // Uncomment this bloc when back ready
+    // this.beneficiaryService.blockBeneficiary(beneficiaryId).subscribe(((res)=>{
+    //   console.log(res);
+
+    // }),err=>{
+    //   console.error(err);
+
+    // })
+  }
+  unblockBeneficiary(beneficiary: Beneficiary) {
+    const beneficiaryId = beneficiary.id;
+    if (!beneficiaryId) return;
+    console.log('UnBlock beneficiary Id : ' + beneficiaryId);
+    // Uncomment this bloc when back ready
+    // this.beneficiaryService.blockBeneficiary(beneficiaryId).subscribe(((res)=>{
+    //   console.log(res);
+
+    // }),err=>{
+    //   console.error(err);
+
+    // })
+  }
 }

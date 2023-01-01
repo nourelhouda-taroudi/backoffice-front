@@ -10,6 +10,10 @@ import { Sirone } from '../models/sirone.model';
 export class SironeService {
   constructor(private readonly http: HttpClient) {}
 
+  /**
+   * Get sirone list
+   * @returns sirone list
+   */
   getSironeList(): Observable<Sirone[]> {
     return this.http.get<Sirone[]>(
       environment.BASE_URL_BACKOFFICE + '/sirone/all'

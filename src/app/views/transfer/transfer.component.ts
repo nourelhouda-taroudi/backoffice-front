@@ -14,8 +14,12 @@ export class TransferComponent implements OnInit {
   constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {
+    // Get all transfers
     this.getAll();
   }
+  /**
+   * Get all transfers
+   */
   getAll() {
     this.loading = true;
     this.transferService.getAllTransfers().subscribe(
@@ -29,15 +33,25 @@ export class TransferComponent implements OnInit {
       }
     );
   }
-  unblock(transfer: Transfer) {
+  /**
+   * unblock transfer
+   * @param transfer 
+   */
+  unblockTransfer(transfer: Transfer) {
     const reference: string = transfer.reference;
     console.log('Unblocking transfer ref : ' + reference);
   }
 
-  block(transfer: Transfer) {
+  /**
+   * block transfer
+   * @param transfer 
+   */
+  blockTransfer(transfer: Transfer) {
     const reference: string = transfer.reference;
     console.log('Blocking transfer ref : ' + reference);
   }
+
+  //TODO: add alert
   showMessage(msg: string, type: string): void {
     window.scrollTo(0, 0);
     this.alert = {
@@ -46,6 +60,11 @@ export class TransferComponent implements OnInit {
       timeout: 5000,
     };
   }
+
+  createTrnsfer(){
+    // TODO: add create transfer
+  }
+  
   onClosed() {
     this.alert = null;
   }

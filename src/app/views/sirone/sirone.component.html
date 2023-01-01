@@ -24,7 +24,9 @@
           <td class="py-4 px-6">29/12/2022</td>
           <td class="py-4 px-6">Bad client</td>
           <td class="py-4 px-6 grid grid-cols-2 gap-2">
-            <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+            <button
+              class="rounded bg-green-400 text-white text-center border px-4 py-3"
+            >
               UnBlock
             </button>
           </td>
@@ -43,7 +45,10 @@
           <td class="py-4 px-6">{{ sirone.block_date }}</td>
           <td class="py-4 px-6">{{ sirone.motif }}</td>
           <td class="py-4 px-6">
-            <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+            <button
+              onclick="unblock(sirone)"
+              class="rounded bg-green-400 text-white text-center border px-4 py-3"
+            >
               UnBlock
             </button>
           </td>

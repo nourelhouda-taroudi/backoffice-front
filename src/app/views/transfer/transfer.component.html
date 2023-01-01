@@ -1,8 +1,12 @@
 <div>
   <h1 class="font-bold text-2xl text-gray-700">TRANSFERS</h1>
-  <div class="w-full border my-5 flex justify-between">
+  <div class="w-full my-5 flex justify-between">
     <div class=""></div>
-    <button clas="text-white bg-blue-400 hover:bg-blue-600 rounded border px-3 py-2 hover:shadow-md">Create Transfer</button>
+    <button
+      class="text-white bg-blue-400 hover:bg-blue-600 rounded border px-3 py-2 hover:shadow-md"
+    >
+      Create Transfer
+    </button>
   </div>
 
   <div class="mt-10" *ngIf="!loading">
@@ -30,11 +34,15 @@
             <td class="py-4 px-6">12200DH</td>
             <td class="py-4 px-6 grid grid-cols-2 gap-2">
               <button
-                class="rounded bg-red-400 text-white text-center border px-4 py-3"
+                onclick="blockTransfer(transfer)"
+                class="rounded bg-red-400 text-white text-center border px-4 py-3 hover:shadow-md"
               >
                 Block
               </button>
-              <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+              <button
+                onclick="unblockTransfer(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
+              >
                 UnBlock
               </button>
             </td>
@@ -54,11 +62,15 @@
             <td class="py-4 px-6">{{ transfer.transferAmount }}</td>
             <td class="py-4 px-6">
               <button
+                onclick="blockTransfer(transfer)"
                 class="rounded bg-red-400 text-white text-center border px-4 py-3"
               >
                 Block
               </button>
-              <button class="rounded bg-green-400 text-white text-center border px-4 py-3">
+              <button
+                onclick="unblockTransfer(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-3"
+              >
                 UnBlock
               </button>
             </td>

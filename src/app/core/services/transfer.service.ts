@@ -41,4 +41,17 @@ export class TransferService {
       {}
     );
   }
+
+  /**
+   * Unblock transfer by id
+   * @param transferId
+   */
+  returnTransfer(transferId: string | number, raison: string): Observable<any> {
+    return this.http.put(
+      `${environment.BASE_URL_BACKOFFICE}/transfers/${transferId}/return`,
+      {
+        raison,
+      }
+    );
+  }
 }

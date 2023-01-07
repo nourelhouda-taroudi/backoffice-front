@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransferStatus } from 'src/app/core/enums';
 import { TransferService } from 'src/app/core/services/transfer.service';
 import { Transfer } from '../../core/models/transfer.model';
 @Component({
@@ -7,10 +8,42 @@ import { Transfer } from '../../core/models/transfer.model';
   styleUrls: ['./transfer.component.css'],
 })
 export class TransferComponent implements OnInit {
-  transfers: Transfer[] = [];
+  // transfers: Transfer[] = [];
   error: string = '';
+  errors={
+    raison:'',
+  }
+
   alert: any;
   loading = false;
+  raison: string = '';
+  showReturnModal = true;
+  transferToReturn!: Transfer;
+  transfers: Transfer[] = [
+    {
+      id: 1,
+      reference: 'AE99922',
+      amount: 1000,
+      agentId: 2,
+      status: TransferStatus.TO_SERVE,
+      beneficiary: 4,
+      transferAmount: 10000,
+      backOfficeId: 5,
+      clientId: 6,
+      operationAmount: 1010,
+      enabled: true,
+      notified: true,
+      fees: {
+        beneficiaryFees: 0,
+        clientFees: 10,
+        feesType: 'APP',
+        id: 1,
+      },
+      type: '',
+      createdAt: new Date(),
+      unblockedAt: new Date(),
+    },
+  ];
   constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {
@@ -24,7 +57,7 @@ export class TransferComponent implements OnInit {
     this.loading = true;
     this.transferService.getAllTransfers().subscribe(
       (res) => {
-        this.transfers = res;
+        // this.transfers = res; To decommanted after
         this.loading = false;
       },
       (err) => {
@@ -35,7 +68,7 @@ export class TransferComponent implements OnInit {
   }
   /**
    * unblock transfer
-   * @param transfer 
+   * @param transfer
    */
   unblockTransfer(transfer: Transfer) {
     const reference: string = transfer.reference;
@@ -44,7 +77,7 @@ export class TransferComponent implements OnInit {
 
   /**
    * block transfer
-   * @param transfer 
+   * @param transfer
    */
   blockTransfer(transfer: Transfer) {
     const reference: string = transfer.reference;
@@ -61,10 +94,34 @@ export class TransferComponent implements OnInit {
     };
   }
 
-  createTrnsfer(){
-    // TODO: add create transfer
+  resetErrors(){
+    this.errors.raison='';
   }
-  
+
+  showReturn(transfer: Transfer) {
+    this.transferToReturn = transfer;
+    this.showReturnModal = true;
+  }
+
+  returnTransfer() {
+    console.log('Return transfer');
+    if (this.raison == '') {
+      this.errors.raison='Raison is required.'
+    }
+    return this.transferService
+      .returnTransfer(this.transferToReturn.reference, this.raison)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.showReturnModal=false;
+        },
+        (err) => {
+          console.log(err);
+          this.showReturnModal=false;
+        }
+      );
+  }
+
   onClosed() {
     this.alert = null;
   }

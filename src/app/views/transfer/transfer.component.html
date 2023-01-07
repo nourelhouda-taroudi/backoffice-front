@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="bg-white border-b">
+          <!-- <tr class="bg-white border-b">
             <th
               scope="row"
               class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
@@ -34,19 +34,25 @@
             <td class="py-4 px-6">12200DH</td>
             <td class="py-4 px-6 grid grid-cols-2 gap-2">
               <button
-                onclick="blockTransfer(transfer)"
+                (click)="blockTransfer(transfer)"
                 class="rounded bg-red-400 text-white text-center border px-4 py-3 hover:shadow-md"
               >
                 Block
               </button>
               <button
-                onclick="unblockTransfer(transfer)"
+                (click)="unblockTransfer(transfer)"
                 class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
               >
                 UnBlock
               </button>
+              <button
+                (click)="transferToReturn(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
+              >
+                Return
+              </button>
             </td>
-          </tr>
+          </tr> -->
           <tr
             class="bg-white border-b"
             *ngFor="let transfer of transfers; let i = index"
@@ -60,23 +66,66 @@
             <td class="py-4 px-6">{{ transfer.status }}</td>
             <td class="py-4 px-6">{{ transfer.beneficiary }}</td>
             <td class="py-4 px-6">{{ transfer.transferAmount }}</td>
-            <td class="py-4 px-6">
+            <td class="py-4 px-6 gap-2">
               <button
-                onclick="blockTransfer(transfer)"
-                class="rounded bg-red-400 text-white text-center border px-4 py-3"
+                (click)="blockTransfer(transfer)"
+                class="rounded bg-red-400 text-white text-center border px-4 py-2 hover:shadow-md"
               >
                 Block
               </button>
               <button
-                onclick="unblockTransfer(transfer)"
-                class="rounded bg-green-400 text-white text-center border px-4 py-3"
+                (click)="unblockTransfer(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-2 hover:shadow-md"
               >
                 UnBlock
+              </button>
+              <button
+                (click)="showReturn(transfer)"
+                class="rounded bg-yellow-400 text-white text-center border px-4 py-2 hover:shadow-md"
+              >
+                Return
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div
+    class="z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center"
+    *ngIf="showReturnModal && transferToReturn"
+  >
+    <div
+      (click)="showReturnModal = false"
+      class="absolute w-full h-full back bg-gray-900 opacity-60 modal-overlay"
+    ></div>
+
+    <div
+      class="z-50 w-11/12 mx-auto overflow-y-auto bg-white rounded-lg shadow-2xl modal-container md:max-w-2xl px-10 py-10"
+    >
+      <h2 class="text-xl font-bold">Return Transfer {{ transferToReturn.reference }}</h2>
+
+      <div class="flex flex-col my-10">
+        <label for="raison">Raison *</label>
+        <input
+          class="w-full py-3 px-2 my-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 focus:border-primary rounded-md appearance-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+          type="text"
+          name="raison"
+          [(ngModel)]="raison"
+          id="team"
+          placeholder="Raison"
+          (change)="resetErrors()"
+        />
+        <small class="text-red-500 italic" *ngIf="errors.raison != ''">{{
+          errors.raison
+        }}</small>
+      </div>
+      <button
+        (click)="returnTransfer()"
+        class="px-6 py-3 w-full hover:cursor-pointer font-medium tracking-wide text-white bg-opacity-75 bg-yellow-500 rounded-lg hover:bg-opacity-100 focus:outline-none"
+      >
+        Return
+      </button>
     </div>
   </div>
 </div>

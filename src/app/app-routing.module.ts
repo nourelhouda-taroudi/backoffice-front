@@ -5,7 +5,7 @@ import { DefaultLayoutComponent } from './views/containers';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'transfers',
     pathMatch: 'full',
   },
   {

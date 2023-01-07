@@ -16,32 +16,6 @@
     <div class="sidebar-content px-4 py-6">
       <ul class="flex flex-col w-full">
         <li class="my-px">
-          <a
-            [routerLink]="['/dashboard']"
-            routerLinkActive="bg-gray-100 text-gray-700"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <span
-              class="flex items-center justify-center text-lg text-gray-400"
-            >
-              <svg
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="h-6 w-6"
-              >
-                <path
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
-            </span>
-            <span class="ml-3">Dashboard</span>
-          </a>
-        </li>
-        <li class="my-px">
           <span
             class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase"
             >Transfers</span
@@ -50,7 +24,7 @@
         <li class="my-px">
           <a
             [routerLink]="['/transfers']"
-            routerLinkActive="bg-gray-100 text-gray-700"
+            routerLinkActive="active"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
@@ -75,7 +49,7 @@
         <li class="my-px">
           <a
             [routerLink]="['/beneficiaries']"
-            routerLinkActive="bg-gray-100 text-gray-700"
+            routerLinkActive="active"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
@@ -102,7 +76,7 @@
         <li class="my-px">
           <a
             [routerLink]="['/sirone']"
-            routerLinkActive="bg-gray-100 text-gray-700"
+            routerLinkActive="active"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
@@ -129,31 +103,6 @@
             > -->
           </a>
         </li>
-        <!-- <li class="my-px">
-          <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <span
-              class="flex items-center justify-center text-lg text-green-400"
-            >
-              <svg
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="h-6 w-6"
-              >
-                <path
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </span>
-            <span class="ml-3">Add new</span>
-          </a>
-        </li> -->
         <li class="my-px">
           <span
             class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase"
@@ -217,7 +166,7 @@
         <li class="my-px">
           <a
             [routerLink]="['/settings']"
-            routerLinkActive="bg-gray-100 text-gray-700"
+            routerLinkActive="active"
             class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-100 hover:bg-gray-100 hover:text-gray-700"
           >
             <span
@@ -242,9 +191,9 @@
           </a>
         </li>
         <li class="my-px">
-          <a
-            href="#"
-            class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+          <button
+            (click)="logout()"
+            class="w-full flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
           >
             <span class="flex items-center justify-center text-lg text-red-400">
               <svg
@@ -262,7 +211,7 @@
               </svg>
             </span>
             <span class="ml-3">Logout</span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
@@ -273,7 +222,7 @@
     <header class="header bg-white shadow py-4 px-4">
       <div class="header-content flex items-center flex-row">
         <form action="#">
-          <div class="hidden md:flex relative">
+          <!-- <div class="hidden md:flex relative">
             <div
               class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
             >
@@ -297,7 +246,7 @@
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-300 w-full h-10 focus:outline-none focus:border-indigo-400"
               placeholder="Search..."
             />
-          </div>
+          </div> -->
           <div class="flex md:hidden">
             <a
               href="#"
@@ -318,7 +267,7 @@
           </div>
         </form>
         <div class="flex ml-auto">
-          <a href class="flex flex-row items-center">
+          <a href class="flex flex-row items-center" *ngIf="currentUser">
             <img
               src="https://pbs.twimg.com/profile_images/378800000298815220/b567757616f720812125bfbac395ff54_normal.png"
               alt
@@ -327,7 +276,7 @@
             <span class="flex flex-col ml-2">
               <span
                 class="truncate w-20 font-semibold tracking-wide leading-none"
-                >John Doe</span
+                >{{currentUser.firstName}} {{currentUser.lastName}}</span
               >
               <span
                 class="truncate w-20 text-gray-500 text-xs leading-none mt-1"

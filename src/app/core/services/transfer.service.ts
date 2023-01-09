@@ -16,7 +16,7 @@ export class TransferService {
    */
   getAllTransfers(): Observable<Transfer[]> {
     return this.http.get<Transfer[]>(
-      `${environment.BASE_URL_BACKOFFICE}/transfers`
+      `${environment.BASE_URL_BACKOFFICE}/byCash/getAllTransfers`
     );
   }
 
@@ -26,7 +26,7 @@ export class TransferService {
    */
   blockTransfer(transferId: string | number): Observable<any> {
     return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/transfers/${transferId}/block`,
+      `${environment.BASE_URL_BACKOFFICE}/lock/${transferId}`,
       {}
     );
   }
@@ -37,18 +37,18 @@ export class TransferService {
    */
   unblockTransfer(transferId: string | number): Observable<any> {
     return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/transfers/${transferId}/unblock`,
+      `${environment.BASE_URL_BACKOFFICE}/unlock/${transferId}`,
       {}
     );
   }
 
   /**
-   * Unblock transfer by id
+   * Return transfer by id
    * @param transferId
    */
   returnTransfer(transferId: string | number, raison: string): Observable<any> {
     return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/transfers/${transferId}/return`,
+      `${environment.BASE_URL_BACKOFFICE}/restitution/validate`,
       {
         raison,
       }

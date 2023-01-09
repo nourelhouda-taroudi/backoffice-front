@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  BASE_URL_BACKOFFICE:'http://localhost:8080'
+  BASE_URL_BACKOFFICE:'http://localhost:8080',
+  KC_URL:'http://localhost:8089/',
+  KC_REALM:'EDB_TRANSFERS',
+  KC_CLIENT_ID:'backoffice'
 };
 
 /*

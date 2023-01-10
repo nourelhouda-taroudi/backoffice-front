@@ -93,7 +93,7 @@ export class TransferComponent implements OnInit {
       this.errors.raison = 'Raison is required.';
     }
     return this.transferService
-      .returnTransfer(this.transferToReturn.reference, this.raison, '1234')
+      .returnTransfer(this.transferToReturn._id, this.raison, '1234')
       .then((res) => {
         console.log(res);
         this.showReturnModal = false;

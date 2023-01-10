@@ -17,7 +17,7 @@ export class TransferService {
    */
   getAllTransfers() {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.ALL}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.ALL}`,
       {
         method: 'GET',
       }
@@ -25,7 +25,7 @@ export class TransferService {
   }
   getAllBlockedTransfers() {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.ALL_LOCKED}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.ALL_LOCKED}`,
       { method: 'GET' }
     );
   }
@@ -46,7 +46,7 @@ export class TransferService {
   // Using fetch
   async blockTransfer(transferId: string | number) {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.LOCK}/${transferId}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.LOCK}/${transferId}`,
       { method: 'POST' }
     );
   }
@@ -57,7 +57,7 @@ export class TransferService {
    */
   unblockTransfer(transferId: string | number) {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.UNLOCK}/${transferId}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.UNLOCK}/${transferId}`,
       { method: 'POST' }
     );
   }
@@ -68,7 +68,7 @@ export class TransferService {
    */
   returnTransfer(transferId: string | number, raison: string, canalId: string) {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.RETURN}?canalId=${canalId}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.RETURN}?canalId=${canalId}&reference=${transferId}`,
       {
         method: 'POST',
       }
@@ -77,7 +77,7 @@ export class TransferService {
 
   getTransferByReference(refernce: string) {
     return fetch(
-      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.BY_REF}/${refernce}`,
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.TRANSFERS.BY_REF}/${refernce}`,
       { method: 'GET' }
     );
   }

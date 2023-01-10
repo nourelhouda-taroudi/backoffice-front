@@ -23,3 +23,27 @@ jobs:
         docker images
     - name: Push Docker image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/backoffice-frontend:1.0
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+      - name: Pull image from registry and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          script: |
+            sudo docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} 
+            echo Pull image
+            sudo docker pull  ${{ secrets.DOCKER_USER }}/backoffice-frontend:1.0
+            sudo docker images
+            echo restart container
+            sudo docker kill $(sudo docker ps -q)
+            sudo docker rm $(sudo docker ps -a -q)
+            sudo sudo docker run -d -p 8081:80 --name backoffice-frontend-1.0 ${{ secrets.DOCKER_USER }}/backoffice-frontend:1.0
+            sudo docker images
+            sudo docker ps

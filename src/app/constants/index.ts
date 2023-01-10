@@ -9,6 +9,7 @@ export const PATHS = {
       UNLOCK: BASE_PATH + '/unlock',
       ALL_LOCKED: BASE_PATH + '/unlock/getAllBlockedTransfers',
       RETURN: BASE_PATH + '/restitution/validate',
+      BY_REF:BASE_EMISSION_PATH+'/cash/getTransfer'
     },
     SETTINGS: {
       ALL: 'settings/all',

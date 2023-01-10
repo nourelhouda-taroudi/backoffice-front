@@ -74,4 +74,11 @@ export class TransferService {
       }
     );
   }
+
+  getTransferByReference(refernce: string) {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.BY_REF}/${refernce}`,
+      { method: 'GET' }
+    );
+  }
 }

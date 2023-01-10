@@ -42,7 +42,6 @@ export class SettingsComponent implements OnInit {
       .getAllParams()
       .then((data: TransferParam[]) => {
         this.transferParams = data;
-        console.log({ data });
         this.setParams();
       })
       .catch((err) => {

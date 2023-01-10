@@ -4,7 +4,7 @@ export const initializeKeycloak = (keycloak: KeycloakService)=> {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8089/',
+        url: 'http://ec2-44-202-143-82.compute-1.amazonaws.com:8089/',
         realm: 'EDB_TRANSFERS',
         clientId: 'backoffice',
       },

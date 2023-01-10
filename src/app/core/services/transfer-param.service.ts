@@ -21,15 +21,13 @@ export class TransferParamService {
   }
 
   updateParam(param: TransferParam) {
-    const formData = new FormData();
-    formData.append('id', '' + param.id);
-    formData.append('name', param.name);
-    formData.append('value', '' + param.value);
     return fetch(
       `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.SETTINGS.UPDATE}`,
       {
         method: 'PUT',
-        body: formData,
+        body: JSON.stringify(param),
+        headers: { 'Content-Type': 'application/json' }, // tells the server we have json
+
       }
     );
   }

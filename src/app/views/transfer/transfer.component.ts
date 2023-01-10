@@ -20,6 +20,7 @@ export class TransferComponent implements OnInit {
   showReturnModal = true;
   transferToReturn!: Transfer;
   transfers: Transfer[] = [];
+  reference = '';
   constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class TransferComponent implements OnInit {
   async getAll() {
     this.loading = true;
     const res = await this.transferService.getAllTransfers();
-    if(res.status === 200){
+    if (res.status === 200) {
       this.transfers = await res.json();
     }
   }
@@ -102,6 +103,21 @@ export class TransferComponent implements OnInit {
         console.log(err);
         this.showReturnModal = false;
       });
+  }
+
+  search() {
+    if (this.reference == '') this.getAll();
+    else
+      this.transferService
+        .getTransferByReference(this.reference)
+        .then(async (res) => {
+          if (res.status === 200) {
+            this.transfers = [await res.json()];
+          } else {
+            this.transfers = [];
+          }
+        })
+        .catch(() => (this.transfers = []));
   }
 
   onClosed() {

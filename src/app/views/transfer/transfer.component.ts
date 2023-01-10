@@ -10,40 +10,16 @@ import { Transfer } from '../../core/models/transfer.model';
 export class TransferComponent implements OnInit {
   // transfers: Transfer[] = [];
   error: string = '';
-  errors={
-    raison:'',
-  }
+  errors = {
+    raison: '',
+  };
 
   alert: any;
   loading = false;
   raison: string = '';
   showReturnModal = true;
   transferToReturn!: Transfer;
-  transfers: Transfer[] = [
-    {
-      id: 1,
-      reference: 'AE99922',
-      amount: 1000,
-      agentId: 2,
-      status: TransferStatus.TO_SERVE,
-      beneficiary: 4,
-      transferAmount: 10000,
-      backOfficeId: 5,
-      clientId: 6,
-      operationAmount: 1010,
-      enabled: true,
-      notified: true,
-      fees: {
-        beneficiaryFees: 0,
-        clientFees: 10,
-        feesType: 'APP',
-        id: 1,
-      },
-      type: '',
-      createdAt: new Date(),
-      unblockedAt: new Date(),
-    },
-  ];
+  transfers: Transfer[] = [];
   constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {
@@ -53,35 +29,42 @@ export class TransferComponent implements OnInit {
   /**
    * Get all transfers
    */
-  getAll() {
+  async getAll() {
     this.loading = true;
-    this.transferService.getAllTransfers().subscribe(
-      (res) => {
-        // this.transfers = res; To decommanted after
-        this.loading = false;
-      },
-      (err) => {
-        console.error(err);
-        this.loading = false;
-      }
-    );
-  }
-  /**
-   * unblock transfer
-   * @param transfer
-   */
-  unblockTransfer(transfer: Transfer) {
-    const reference: string = transfer.reference;
-    console.log('Unblocking transfer ref : ' + reference);
+    const res = await this.transferService.getAllTransfers();
+    if(res.status === 200){
+      this.transfers = await res.json();
+    }
   }
 
   /**
    * block transfer
    * @param transfer
    */
-  blockTransfer(transfer: Transfer) {
-    const reference: string = transfer.reference;
+  async blockTransfer(transfer: Transfer) {
+    const reference: string = transfer._id;
     console.log('Blocking transfer ref : ' + reference);
+    const res = await this.transferService.blockTransfer(reference);
+    if (res.status === 200) {
+      this.getAll();
+    }
+  }
+
+  /**
+   * unblock transfer
+   * @param transfer
+   */
+  unblockTransfer(transfer: Transfer) {
+    const reference: string = transfer._id;
+    console.log('Unblocking transfer ref : ' + reference);
+    this.transferService
+      .unblockTransfer(reference)
+      .then((res) => {
+        this.getAll(); // refresh
+      })
+      .catch((err) => {
+        console.log('Error ', err);
+      });
   }
 
   //TODO: add alert
@@ -94,8 +77,8 @@ export class TransferComponent implements OnInit {
     };
   }
 
-  resetErrors(){
-    this.errors.raison='';
+  resetErrors() {
+    this.errors.raison = '';
   }
 
   showReturn(transfer: Transfer) {
@@ -106,20 +89,19 @@ export class TransferComponent implements OnInit {
   returnTransfer() {
     console.log('Return transfer');
     if (this.raison == '') {
-      this.errors.raison='Raison is required.'
+      this.errors.raison = 'Raison is required.';
     }
     return this.transferService
-      .returnTransfer(this.transferToReturn.reference, this.raison)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.showReturnModal=false;
-        },
-        (err) => {
-          console.log(err);
-          this.showReturnModal=false;
-        }
-      );
+      .returnTransfer(this.transferToReturn.reference, this.raison, '1234')
+      .then((res) => {
+        console.log(res);
+        this.showReturnModal = false;
+        this.getAll();
+      })
+      .catch((err) => {
+        console.log(err);
+        this.showReturnModal = false;
+      });
   }
 
   onClosed() {

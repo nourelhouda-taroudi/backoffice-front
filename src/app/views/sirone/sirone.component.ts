@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SironeService } from '../../core/services/sirone.service';
 import { Sirone } from '../../core/models/sirone.model';
+import { TransferService } from 'src/app/core/services/transfer.service';
+import { Transfer } from 'src/app/core/models';
 
 @Component({
   selector: 'app-sirone',
@@ -9,45 +11,45 @@ import { Sirone } from '../../core/models/sirone.model';
 })
 export class SironeComponent implements OnInit {
   loading = false;
-  sironeList: Sirone[] = [];
-  constructor(private readonly sironeService: SironeService) {}
+  transfers: Transfer[] = [];
+
+  constructor(private readonly transferService: TransferService) {}
 
   ngOnInit(): void {
-    this.getSironeList();
+    this.getAllBlocked();
+  }
+
+  /**
+   * unblock transfer
+   * @param transfer
+   */
+  unblockTransfer(transfer: Transfer) {
+    const reference: string = transfer._id;
+    console.log('Unblocking transfer ref : ' + reference);
+    this.transferService
+      .unblockTransfer(reference)
+      .then((res) => {
+        this.getAllBlocked(); // refresh
+      })
+      .catch((err) => {
+        console.log('Error ', err);
+      });
   }
 
   /**
    * Get sirone list
    */
-  async getSironeList() {
+  async getAllBlocked() {
     this.loading = true;
-    this.sironeService.getSironeList().subscribe(
-      (res: Sirone[]) => {
+    this.transferService.getAllBlockedTransfers().then(
+     async (res) => {
+        this.transfers = await res.json();
         this.loading = false;
-        this.sironeList = res;
       },
       (err) => {
-        this.loading = false;
         console.error(err);
+        this.loading = false;
       }
     );
-  }
-
-  /**
-   * remove from SIRONE
-   */
-  unblock(sirone: Sirone) {
-    const sironeId = sirone.id;
-    if (!sironeId) return;
-    console.log('Remove from sirone ' + sironeId);
-    // Uncomment this bloc when back ready
-    // this.sironeService.unblockBeneficiary(sironeId).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.error(err);
-    //   }
-    // );
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PATHS } from 'src/app/constants';
 import { environment } from 'src/environments/environment';
 import { TransferParam } from '../models/transfer-param.model';
 
@@ -10,16 +11,26 @@ import { TransferParam } from '../models/transfer-param.model';
 export class TransferParamService {
   constructor(private http: HttpClient) {}
 
-  getAllParams(): Observable<TransferParam[]> {
-    return this.http.get<TransferParam[]>(
-      `${environment.BASE_URL_BACKOFFICE}/param/all`
-    );
+  getAllParams() {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.SETTINGS.ALL}`,
+      {
+        method:'GET',
+      }
+    ).then(res=>res.json())
   }
 
-  updateParam(param: TransferParam): Observable<TransferParam> {
-    return this.http.put<TransferParam>(
-      `${environment.BASE_URL_BACKOFFICE}/param/${param.id}`,
-      param
+  updateParam(param: TransferParam) {
+    const formData = new FormData();
+    formData.append('id', '' + param.id);
+    formData.append('name', param.name);
+    formData.append('value', '' + param.value);
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE_SETTINGS}/${PATHS.BACKOFFICE.SETTINGS.UPDATE}`,
+      {
+        method: 'PUT',
+        body: formData,
+      }
     );
   }
 }

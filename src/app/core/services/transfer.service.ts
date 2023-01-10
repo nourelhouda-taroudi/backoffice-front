@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PATHS } from 'src/app/constants';
 import { environment } from 'src/environments/environment';
 import { Transfer } from '../models/transfer.model';
 
@@ -14,9 +15,18 @@ export class TransferService {
    * Get all transfers
    * @returns transfers
    */
-  getAllTransfers(): Observable<Transfer[]> {
-    return this.http.get<Transfer[]>(
-      `${environment.BASE_URL_BACKOFFICE}/byCash/getAllTransfers`
+  getAllTransfers() {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.ALL}`,
+      {
+        method: 'GET',
+      }
+    );
+  }
+  getAllBlockedTransfers() {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.ALL_LOCKED}`,
+      { method: 'GET' }
     );
   }
 
@@ -24,10 +34,20 @@ export class TransferService {
    * Block transfer by id
    * @param transferId
    */
-  blockTransfer(transferId: string | number): Observable<any> {
-    return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/lock/${transferId}`,
-      {}
+  // blockTransfer(transferId: string | number): Observable<any> {
+  //   console.log({transferId});
+  //   const res = this.http.post<any>(
+  //     `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.LOCK}/${transferId}`,
+  //     {}
+  //   );
+  //   return res;
+  // }
+
+  // Using fetch
+  async blockTransfer(transferId: string | number) {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.LOCK}/${transferId}`,
+      { method: 'POST' }
     );
   }
 
@@ -35,10 +55,10 @@ export class TransferService {
    * Unblock transfer by id
    * @param transferId
    */
-  unblockTransfer(transferId: string | number): Observable<any> {
-    return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/unlock/${transferId}`,
-      {}
+  unblockTransfer(transferId: string | number) {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.UNLOCK}/${transferId}`,
+      { method: 'POST' }
     );
   }
 
@@ -46,11 +66,11 @@ export class TransferService {
    * Return transfer by id
    * @param transferId
    */
-  returnTransfer(transferId: string | number, raison: string): Observable<any> {
-    return this.http.put(
-      `${environment.BASE_URL_BACKOFFICE}/restitution/validate`,
+  returnTransfer(transferId: string | number, raison: string, canalId: string) {
+    return fetch(
+      `${environment.BASE_URL_BACKOFFICE}/${PATHS.BACKOFFICE.TRANSFERS.RETURN}?canalId=${canalId}`,
       {
-        raison,
+        method: 'POST',
       }
     );
   }

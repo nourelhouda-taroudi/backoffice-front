@@ -9,7 +9,7 @@
     </button> -->
   </div>
 
-  <div class="mt-10" *ngIf="!loading">
+  <div class="mt-10">
     <div class="overflow-x-auto relative">
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -22,37 +22,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr class="bg-white border-b">
-            <th
-              scope="row"
-              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
-            >
-              123
-            </th>
-            <td class="py-4 px-6">BLOCKED</td>
-            <td class="py-4 px-6">John Doe</td>
-            <td class="py-4 px-6">12200DH</td>
-            <td class="py-4 px-6 grid grid-cols-2 gap-2">
-              <button
-                (click)="blockTransfer(transfer)"
-                class="rounded bg-red-400 text-white text-center border px-4 py-3 hover:shadow-md"
-              >
-                Block
-              </button>
-              <button
-                (click)="unblockTransfer(transfer)"
-                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
-              >
-                UnBlock
-              </button>
-              <button
-                (click)="transferToReturn(transfer)"
-                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
-              >
-                Return
-              </button>
-            </td>
-          </tr> -->
           <tr
             class="bg-white border-b"
             *ngFor="let transfer of transfers; let i = index"
@@ -61,25 +30,28 @@
               scope="row"
               class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
             >
-              {{ transfer.clientId }}
+              {{ transfer.clientFullName }}
             </th>
             <td class="py-4 px-6">{{ transfer.status }}</td>
-            <td class="py-4 px-6">{{ transfer.beneficiary }}</td>
-            <td class="py-4 px-6">{{ transfer.transferAmount }}</td>
+            <td class="py-4 px-6">{{ transfer.beneficiaryFirstName }}</td>
+            <td class="py-4 px-6">{{ transfer.totalAmount }}</td>
             <td class="py-4 px-6 gap-2">
               <button
+                *ngIf="transfer.status !== 'blocked'"
                 (click)="blockTransfer(transfer)"
                 class="rounded bg-red-400 text-white text-center border px-4 py-2 hover:shadow-md"
               >
                 Block
               </button>
               <button
+              *ngIf="transfer.status !== 'unlock to serve'"
                 (click)="unblockTransfer(transfer)"
                 class="rounded bg-green-400 text-white text-center border px-4 py-2 hover:shadow-md"
               >
                 UnBlock
               </button>
               <button
+              *ngIf="transfer.status !== 'returned'"
                 (click)="showReturn(transfer)"
                 class="rounded bg-yellow-400 text-white text-center border px-4 py-2 hover:shadow-md"
               >

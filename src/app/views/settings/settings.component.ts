@@ -11,20 +11,20 @@ import { TransferParamService } from '../../core/services/transfer-param.service
 export class SettingsComponent implements OnInit {
   transferParams: TransferParam[] = [];
   maxTransfer: TransferParam | null = {
-    id:1,
-    name:"MAX_TRANSFER",
-    value:2000
+    id: 1,
+    name: 'MAX_TRANSFER',
+    value: 2000,
   };
-  
-  feesApp: TransferParam | null={
-    id:2,
-    name:"FEES_AGENCY",
-    value:20
+
+  feesApp: TransferParam | null = {
+    id: 2,
+    name: 'FEES_AGENCY',
+    value: 20,
   };
-  feesAgency: TransferParam | null={
-    id:3,
-    name:"FEES_APP",
-    value:15
+  feesAgency: TransferParam | null = {
+    id: 3,
+    name: 'FEES_APP',
+    value: 15,
   };
   error!: string;
 
@@ -38,15 +38,16 @@ export class SettingsComponent implements OnInit {
    * Get all parms
    */
   getAllParams() {
-    this.transferParamService.getAllParams().subscribe(
-      (data: TransferParam[]) => {
+    this.transferParamService
+      .getAllParams()
+      .then((data: TransferParam[]) => {
         this.transferParams = data;
-        // this.setParams();
-      },
-      (err) => {
+        console.log({ data });
+        this.setParams();
+      })
+      .catch((err) => {
         console.log(err);
-      }
-    );
+      });
   }
 
   /**
@@ -73,6 +74,7 @@ export class SettingsComponent implements OnInit {
    * @param transferParam
    */
   updateParam(transferParam: TransferParam) {
+    console.log('Update transfer param');
     if (
       transferParam.name !==
         TransferParamName[TransferParamName.MAX_TRANSFER] &&
@@ -80,12 +82,12 @@ export class SettingsComponent implements OnInit {
     ) {
       return;
     }
-    this.transferParamService.updateParam(transferParam).subscribe(
+    this.transferParamService.updateParam(transferParam).then(
       (res) => {
         console.log('Param updated');
       },
       (err) => {
-        console.error(err);
+        console.error({ err });
       }
     );
   }

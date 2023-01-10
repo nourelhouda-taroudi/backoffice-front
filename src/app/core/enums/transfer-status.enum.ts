@@ -1,10 +1,10 @@
 export enum TransferStatus {
-  TO_SERVE="TO_SERVE",
-  SERVED="SERVED",
-  CANCELED="CANCELED",
-  RETURNED="RETURNED",
-  BLOCKED="BLOCKED",
-  UNBLOCKED="UNBLOCKED",
-  EXPIRED="EXPIRED",
-  WAITING="WAITING",
+  TO_SERVE = "to serve",
+  SERVED = "served",
+  BLOCKED = "blocked",
+  RETURNED = "returned",
+  REVERSE = "reversed",
+  DORMANT = "dormant",
+  UNLOCK_TO_SERVE = "unlock to serve"
 }
+

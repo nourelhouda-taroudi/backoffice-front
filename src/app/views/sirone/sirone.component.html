@@ -1,59 +1,82 @@
 <div>
-  <h1 class="font-bold text-2xl text-gray-700">SIRONE</h1>
+  <h1 class="font-bold text-2xl text-gray-700">BLOACKED TRANSFERS</h1>
+  <div class="w-full my-5 flex justify-between">
+    <div class=""></div>
+    <!-- <button
+      class="text-white bg-blue-400 hover:bg-blue-600 rounded border px-3 py-2 hover:shadow-md"
+    >
+      Create Transfer
+    </button> -->
+  </div>
 
   <div class="mt-10" *ngIf="!loading">
-    <table class="w-full text-sm text-left text-gray-500">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-        <tr>
-          <th scope="col" class="py-3 px-6">Id</th>
-          <th scope="col" class="py-3 px-6">Beneficiary</th>
-          <th scope="col" class="py-3 px-6">Block Date</th>
-          <th scope="col" class="py-3 px-6">Motif</th>
-          <th scope="col" class="py-3 px-6">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-white border-b">
-          <th
-            scope="row"
-            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
-          >
-            123
-          </th>
-          <td class="py-4 px-6">John Doe</td>
-          <td class="py-4 px-6">29/12/2022</td>
-          <td class="py-4 px-6">Bad client</td>
-          <td class="py-4 px-6 grid grid-cols-2 gap-2">
-            <button
-              class="rounded bg-green-400 text-white text-center border px-4 py-3"
+    <div class="overflow-x-auto relative">
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3 px-6">Client Id</th>
+            <th scope="col" class="py-3 px-6">Status</th>
+            <th scope="col" class="py-3 px-6">Bénéficiaire</th>
+            <th scope="col" class="py-3 px-6">Montant</th>
+            <th scope="col" class="py-3 px-6">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr class="bg-white border-b">
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
             >
-              UnBlock
-            </button>
-          </td>
-        </tr>
-        <tr
-          class="bg-white border-b"
-          *ngFor="let sirone of sironeList; let i = index"
-        >
-          <th
-            scope="row"
-            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+              123
+            </th>
+            <td class="py-4 px-6">BLOCKED</td>
+            <td class="py-4 px-6">John Doe</td>
+            <td class="py-4 px-6">12200DH</td>
+            <td class="py-4 px-6 grid grid-cols-2 gap-2">
+              <button
+                (click)="blockTransfer(transfer)"
+                class="rounded bg-red-400 text-white text-center border px-4 py-3 hover:shadow-md"
+              >
+                Block
+              </button>
+              <button
+                (click)="unblockTransfer(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
+              >
+                UnBlock
+              </button>
+              <button
+                (click)="transferToReturn(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-3 hover:shadow-md"
+              >
+                Return
+              </button>
+            </td>
+          </tr> -->
+          <tr
+            class="bg-white border-b"
+            *ngFor="let transfer of transfers; let i = index"
           >
-            {{ sirone.id }}
-          </th>
-          <td class="py-4 px-6">{{ sirone.beneficiary }}</td>
-          <td class="py-4 px-6">{{ sirone.block_date }}</td>
-          <td class="py-4 px-6">{{ sirone.motif }}</td>
-          <td class="py-4 px-6">
-            <button
-              onclick="unblock(sirone)"
-              class="rounded bg-green-400 text-white text-center border px-4 py-3"
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
             >
-              UnBlock
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              {{ transfer.clientFullName }}
+            </th>
+            <td class="py-4 px-6">{{ transfer.status }}</td>
+            <td class="py-4 px-6">{{ transfer.beneficiaryFirstName }}</td>
+            <td class="py-4 px-6">{{ transfer.totalAmount }}</td>
+            <td class="py-4 px-6 gap-2">
+              <button
+                (click)="unblockTransfer(transfer)"
+                class="rounded bg-green-400 text-white text-center border px-4 py-2 hover:shadow-md"
+              >
+                UnBlock
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

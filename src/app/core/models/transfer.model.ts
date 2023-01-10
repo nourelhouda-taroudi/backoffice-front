@@ -2,10 +2,10 @@ import { TransferStatus } from '../enums/transfer-status.enum';
 import { Fees } from './fees.model';
 
 export class Transfer {
-  id!: number;
+  _id!: string;
   amount!: number;
   reference!: string;
-  transferAmount!: number;
+  totalAmount!: number;
   operationAmount!: number;
   status!: TransferStatus;
   type!: string;
@@ -16,6 +16,7 @@ export class Transfer {
   agentId!: number;
   backOfficeId!: number;
   clientId!: number;
-  beneficiary!: number;
+  clientFullName!:string;
+  beneficiaryFirstName!: string;
   fees!: Fees;
 }

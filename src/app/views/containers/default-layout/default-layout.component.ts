@@ -9,14 +9,15 @@ import { KeycloakProfile } from 'keycloak-js';
 })
 export class DefaultLayoutComponent implements OnInit{
   currentUser!:KeycloakProfile;
+  showConfirm=false;
   constructor(
     private readonly keycloakService: KeycloakService,
-  ){}
-
-  async ngOnInit() {
-    this.currentUser = await this.keycloakService.loadUserProfile();
-  }
-  logout(){
-    this.keycloakService.logout()
-  }
+    ){}
+    
+    async ngOnInit() {
+      this.currentUser = await this.keycloakService.loadUserProfile();    
+    }
+    logout(){
+      this.keycloakService.logout();
+    }
 }

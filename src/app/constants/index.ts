@@ -1,8 +1,9 @@
 const BASE_PATH = 'ws-backoffice';
+const BASE_EMISSION_PATH='ws-emission';
 export const PATHS = {
   BACKOFFICE: {
     TRANSFERS: {
-      ALL:BASE_PATH+'/lock/getAllTransfers',
+      ALL:BASE_EMISSION_PATH+'/cash/getAllTransfers',
       ALL_UNLOCKED: BASE_PATH + '/lock/getAllToServeTransfers',
       LOCK: BASE_PATH + '/lock/',
       UNLOCK: BASE_PATH + '/unlock',

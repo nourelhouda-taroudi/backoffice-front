@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: 
+      - main
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        IMAGE_TAG: ${{github.sha}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+    - name: Build the Docker image
+      run: |
+        docker build --file Dockerfile.prod --tag ${{secrets.DOCKER_USER}}/backoffice-frontend:1.0 .
+        docker images
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{secrets.DOCKER_USER}}/backoffice-frontend:1.0
